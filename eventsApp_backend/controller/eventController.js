@@ -6,4 +6,9 @@ const getEvents = asyncHandler(async (req, res, next) => {
   res.json(events);
 });
 
-export { getEvents };
+const getEventDetailsById = asyncHandler(async (req, res, next) => {
+  const event = await Event.findById(req.params.id);
+  res.json(event);
+});
+
+export { getEvents, getEventDetailsById };

@@ -9,7 +9,14 @@ const eventsSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+
+    getEventDetailsById: builder.query({
+      query: (eventId) => ({
+        url: `${EVENTS_URL}/${eventId}`,
+      }),
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
-export const { useGetEventsQuery } = eventsSlice;
+export const { useGetEventsQuery, useGetEventDetailsByIdQuery } = eventsSlice;
