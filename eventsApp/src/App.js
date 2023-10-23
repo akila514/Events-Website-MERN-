@@ -1,12 +1,16 @@
 import React from "react";
 import "./App.css";
 import { Outlet } from "react-router-dom";
+import CustomNavbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <div className="md:mx-32">
-      <Outlet />
-    </div>
+    <>
+      <CustomNavbar />
+      <div className="md:mx-32">
+        <Outlet />
+      </div>
+    </>
   );
 };
 
