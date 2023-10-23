@@ -9,16 +9,19 @@ const EventsContainer = () => {
   return (
     <>
       {isLoading && (
-        <Spinner
-          animation="border"
-          role="status"
-          style={{
-            width: "50px",
-            height: "50px",
-            margin: "auto",
-            display: "block",
-          }}
-        />
+        <div className="20">
+          <Spinner
+            animation="border"
+            role="status"
+            style={{
+              color: "white",
+              width: "50px",
+              height: "50px",
+              margin: "auto",
+              display: "block",
+            }}
+          />
+        </div>
       )}
       {!isLoading && events && (
         <div className="space-y-2 mt-20">

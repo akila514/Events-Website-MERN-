@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetEventDetailsByIdQuery } from "../store/eventsSlice";
-import { Image, Spinner } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
 
 const EventDescription = () => {
   const { id: eventId } = useParams();
@@ -18,6 +18,7 @@ const EventDescription = () => {
           animation="border"
           role="status"
           style={{
+            color: "white",
             width: "50px",
             height: "50px",
             margin: "auto",
