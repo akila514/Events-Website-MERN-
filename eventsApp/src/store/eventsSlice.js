@@ -1,3 +1,4 @@
+import { EVENTS_URL } from "../constants";
 import apiSlice from "./apiSlice";
 
 const eventsSlice = apiSlice.injectEndpoints({
