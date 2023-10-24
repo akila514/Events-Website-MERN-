@@ -2,6 +2,7 @@ import express from "express";
 import eventsRouter from "./routes/eventRouts.js";
 import dotenv from "dotenv";
 import connectDb from "./config/db.js";
+import userRouter from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -18,5 +19,6 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/api/events", eventsRouter);
+app.use("/api/users", userRouter);
 
 app.listen(port);
