@@ -7,14 +7,12 @@ const eventsSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: EVENTS_URL,
       }),
-      keepUnusedDataFor: 5,
     }),
 
     getEventDetailsById: builder.query({
       query: (eventId) => ({
         url: `${EVENTS_URL}/${eventId}`,
       }),
-      keepUnusedDataFor: 5,
     }),
 
     updateEvent: builder.mutation({
@@ -27,4 +25,8 @@ const eventsSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetEventsQuery, useGetEventDetailsByIdQuery } = eventsSlice;
+export const {
+  useGetEventsQuery,
+  useGetEventDetailsByIdQuery,
+  useUpdateEventMutation,
+} = eventsSlice;
