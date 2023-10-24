@@ -10,7 +10,7 @@ const SignupScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const userInfo = useSelector((state) => state.auth);
+  const userInfo = useSelector((state) => state.auth.userInfo);
 
   const { search } = useLocation();
   const sp = new URLSearchParams(search);

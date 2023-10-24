@@ -11,6 +11,8 @@ const authUser = asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ username });
 
     if (user && (await bycrypt.compare(password, user.password))) {
+      createToken(res, user._id);
+
       res.json({
         username: user.username,
         email: user.email,

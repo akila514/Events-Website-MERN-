@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <CustomNavbar />
-      <div className="md:mx-32">
+      <div className="mx-10 md:mx-32">
         <Outlet />
       </div>
     </>
