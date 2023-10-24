@@ -48,7 +48,7 @@ const CustomNavbar = () => {
           <div className="flex flex-row text-white">
             <button
               onClick={logoutHandler}
-              className="bg-[#3498db] py-1 px-2 rounded-lg font-normal text-sm mr-8 text-sm"
+              className="bg-[#3498db] py-1 px-2 rounded-lg font-normal text-sm mr-8"
             >
               Logout
             </button>
