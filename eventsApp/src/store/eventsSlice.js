@@ -16,6 +16,14 @@ const eventsSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+
+    updateEvent: builder.mutation({
+      query: (updatedEvent) => ({
+        url: `${EVENTS_URL}/edit/${updatedEvent._id}`,
+        method: "POST",
+        body: { ...updatedEvent },
+      }),
+    }),
   }),
 });
 
