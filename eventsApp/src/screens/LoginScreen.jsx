@@ -15,7 +15,7 @@ const LoginScreen = () => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(userName, password);
+    
   };
 
   return (

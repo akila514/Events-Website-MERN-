@@ -1,20 +1,48 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useRegisterUserMutation } from "../store/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../store/authSlice";
 
 const SignupScreen = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [userName, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    console.log(userName, password);
-  };
+  const userInfo = useSelector((state) => state.auth);
 
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   const redirect = sp.get("redirect") || "/";
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [userInfo, navigate, redirect]);
+
+  const [registerUser, { isLoading, isError }] = useRegisterUserMutation();
+
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    try {
+      const user = await registerUser({
+        name,
+        email,
+        username,
+        password,
+      }).unwrap();
+
+      dispatch(authActions.setCredentials({ ...user }));
+      navigate(redirect);
+
+      console.log(user);
+    } catch (error) {}
+  };
 
   return (
     <form className="flex flex-col space-y-5 md:w-[400px] px-10 md:px-0 mx-auto mt-20">
