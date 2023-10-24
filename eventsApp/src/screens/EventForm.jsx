@@ -14,6 +14,7 @@ const EventForm = () => {
     data: event,
     isLoading,
     isError,
+    refetch,
   } = useGetEventDetailsByIdQuery(eventId);
 
   const [updateEvent] = useUpdateEventMutation();
@@ -38,6 +39,8 @@ const EventForm = () => {
         organizers,
         imageLink,
       });
+
+      await refetch();
 
       navigate(`/events/${eventId}`);
     } catch (error) {
