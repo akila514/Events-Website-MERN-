@@ -2,6 +2,7 @@ import { log } from "console";
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/user.js";
 import bycrypt from "bcryptjs";
+import createToken from "../util/createToken.js";
 
 const authUser = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
@@ -21,8 +22,6 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
   const sameUser = await User.findOne({ username });
 
-  console.log(sameUser);
-
   if (sameUser) {
     res.send("This username already exist");
   } else {
@@ -35,7 +34,11 @@ const registerUser = asyncHandler(async (req, res, next) => {
     });
 
     if (user) {
-      res.send(user);
+      createToken(res, user._id);
+      res.status(201).json(user);
+    } else {
+      res.status(400);
+      throw new Error("Something went wrong. Please try again later");
     }
   }
 });
