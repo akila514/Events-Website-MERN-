@@ -7,13 +7,22 @@ import createToken from "../util/createToken.js";
 const authUser = asyncHandler(async (req, res, next) => {
   const { username, password } = req.body;
 
-  const user = await User.find({ username });
+  try {
+    const user = await User.findOne({ username });
 
-  if (user && (await user.comparePasswords(password))) {
-    res.json(user);
-  } else {
+    if (user && (await bycrypt.compare(password, user.password))) {
+      res.json({
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      });
+    } else {
+      res.status(404);
+      res.send("Username or password is invalid");
+    }
+  } catch (error) {
     res.status(404);
-    res.send("Username or password is invalid");
+    res.send("User not found");
   }
 });
 
@@ -35,7 +44,11 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
     if (user) {
       createToken(res, user._id);
-      res.status(201).json(user);
+      res.status(201).json({
+        username: user.username,
+        email: user.email,
+        isAdmin: user.isAdmin,
+      });
     } else {
       res.status(400);
       throw new Error("Something went wrong. Please try again later");

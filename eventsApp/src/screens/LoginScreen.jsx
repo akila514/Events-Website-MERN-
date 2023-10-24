@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLoginUserMutation } from "../store/userSlice";
 
 const LoginScreen = () => {
-  const [userName, setUsername] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [loginUser, { isLoading, isError }] = useLoginUserMutation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -13,9 +16,16 @@ const LoginScreen = () => {
   const sp = new URLSearchParams(search);
   const redirect = sp.get("redirect") || "/";
 
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = async (event) => {
     event.preventDefault();
-    
+
+    try {
+      const user = await loginUser({ username, password }).unwrap();
+      console.log(user);
+      navigate(redirect);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (

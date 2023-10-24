@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import bycrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -9,7 +8,7 @@ const userSchema = new mongoose.Schema({
   isAdmin: { type: Boolean, default: false },
 });
 
-userSchema.methods.comparePasswords = async function (enteredPassword) {
+userSchema.methods.matchPasswords = async function (enteredPassword) {
   return await bycrypt.compare(enteredPassword, this.password);
 };
 
